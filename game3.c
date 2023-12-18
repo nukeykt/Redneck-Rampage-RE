@@ -556,7 +556,7 @@ long tempsectorz[MAXSECTORS];
 long tempsectorpicnum[MAXSECTORS];
 //short tempcursectnum;
 
-SE_150_Draw(int spnum,long x,long y,long z,short a,short h,long smoothratio)
+SE_150_Draw(int spnum,long x,long y,long z,long a,long h,long smoothratio)
 {
  int i=FOFTILE,j,k=0;
  int floor1=spnum,floor2=0,ok=0,fofmode;
@@ -568,8 +568,6 @@ SE_150_Draw(int spnum,long x,long y,long z,short a,short h,long smoothratio)
  tilesizy[FOFTILE] = 0;
  if (!(gotpic[i>>3]&(1<<(i&7)))) return;
  gotpic[i>>3] &= ~(1<<(i&7));
-
- floor1=spnum;
 
  if(sprite[spnum].lotag==152) fofmode=150;
  if(sprite[spnum].lotag==153) fofmode=151;
@@ -595,30 +593,35 @@ SE_150_Draw(int spnum,long x,long y,long z,short a,short h,long smoothratio)
 
 // if(ok==0) { Message("no fof",RED); return; }
 
- for(j=0;j<MAXSPRITES;j++)
+ j = 0;
+ do
  {
   if(
      sprite[j].picnum==1 &&
      sprite[j].lotag==fofmode &&
      sprite[j].hitag==sprite[floor1].hitag
     ) { floor1=j; fofmode=sprite[j].lotag; ok++; break;}
- }
+  j++;
+ } while (j < MAXSPRITES);
 // if(ok==1) { Message("no floor1",RED); return; }
 
  if(fofmode==150) k=151; else k=150;
 
- for(j=0;j<MAXSPRITES;j++)
+ j = 0;
+ do
  {
   if(
      sprite[j].picnum==1 &&
      sprite[j].lotag==k &&
      sprite[j].hitag==sprite[floor1].hitag
     ) {floor2=j; ok++; break;}
- }
+  j++;
+ } while (j < MAXSPRITES);
 
 // if(ok==2) { Message("no floor2",RED); return; }
 
- for(j=0;j<MAXSPRITES;j++)  // raise ceiling or floor
+ j = 0;
+ do
  {
   if(sprite[j].picnum==1 &&
      sprite[j].lotag==k+2 &&
@@ -638,7 +641,8 @@ SE_150_Draw(int spnum,long x,long y,long z,short a,short h,long smoothratio)
       sector[sprite[j].sectnum].ceilingpicnum=13;
      }
     }
- }
+  j++;
+ } while (j < MAXSPRITES);
 
  i=floor1;
  offx=x-sprite[i].x;
@@ -648,7 +652,8 @@ SE_150_Draw(int spnum,long x,long y,long z,short a,short h,long smoothratio)
  animatesprites(offx+sprite[i].x,offy+sprite[i].y,a,smoothratio);
  drawmasks();
 
- for(j=0;j<MAXSPRITES;j++)  // restore ceiling or floor
+ j = 0;
+ do
  {
   if(sprite[j].picnum==1 &&
      sprite[j].lotag==k+2 &&
@@ -664,7 +669,8 @@ SE_150_Draw(int spnum,long x,long y,long z,short a,short h,long smoothratio)
       sector[sprite[j].sectnum].ceilingpicnum=tempsectorpicnum[sprite[j].sectnum];
      }
     }// end if
- }// end for
+  j++;
+ } while (j < MAXSPRITES);
 
 } // end SE40
 
@@ -677,19 +683,10 @@ void SE_150(long x,long y,long z,long a,long h, long smoothratio)
 
     for (i = headspritestat[15]; i >= 0; i = nextspritestat[i])
     {
-        switch(sprite[i].lotag)
+        if (sprite[i].lotag >= 152 && sprite[i].lotag <= 155)
         {
-//            case 40:
-//            case 41:
-//                SE40_Draw(i,x,y,a,smoothratio);
-//                break;
-            case 152:
-            case 153:
-            case 154:
-            case 155:
-                if(ps[screenpeek].cursectnum == sprite[i].sectnum)
-                    SE_150_Draw(i,x,y,z,a,h,smoothratio);
-                break;
+            if(ps[screenpeek].cursectnum == sprite[i].sectnum)
+                SE_150_Draw(i,x,y,z,a,h,smoothratio);
         }
     }
 }
@@ -705,6 +702,14 @@ void displayrooms(short snum,long smoothratio)
     struct player_struct *p;
     long tposx,tposy,tposz,dx,dy,thoriz,i;
     short tang;
+
+#ifdef RRRA
+    int unk1;
+    int unk2;
+    int unk3;
+    int unk4;
+    short unk5;
+#endif
 
     p = &ps[snum];
 
@@ -824,7 +829,8 @@ void displayrooms(short snum,long smoothratio)
 #ifdef RRRA
         if (!(p->gm & MODE_MENU))
         {
-            if (p->DrugMode > 0 && !(p->gm&MODE_TYPE) && !ud.pause_on)
+            if (p->DrugMode > 0)
+                if (!(p->gm & MODE_TYPE) && !ud.pause_on)
             {
                 int var_8c;
                 if (p->raat5f1 == 0)
@@ -872,7 +878,7 @@ void displayrooms(short snum,long smoothratio)
                     else
                     {
                         p->raat5f5++;
-                        setaspect(p->raat5f5 * 500 + oyrepeat * 3, yxaspect);
+                        setaspect(oyrepeat * 3 + p->raat5f5 * 500, yxaspect);
                         p->raat5f7 = oyrepeat * 3 + p->raat5f5 * 500;
                         setpal(p);
                     }
@@ -889,7 +895,7 @@ void displayrooms(short snum,long smoothratio)
                     else
                     {
                         p->raat5f5--;
-                        setaspect(p->raat5f5 * 500 + oyrepeat * 3, yxaspect);
+                        setaspect(oyrepeat * 3 + p->raat5f5 * 500, yxaspect);
                         p->raat5f7 = oyrepeat * 3 + p->raat5f5 * 500;
                         setpal(p);
                     }

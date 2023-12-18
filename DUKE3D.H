@@ -441,7 +441,8 @@ typedef struct player_struct
     short raat5cd;
     short raat5cf;
     long OnBoat, NotOnWater, raat5d9, raat5dd, raat5e1, SeaSick, nocheat, DrugMode;
-    short raat5f1, raat5f3, raat5f5, raat5f7, raat5f9;
+    short raat5f1, raat5f3, raat5f5;
+    long raat5f7;
     short SlotWin;
     long raat5fd, raat601;
     short raat605, raat607, raat609;
