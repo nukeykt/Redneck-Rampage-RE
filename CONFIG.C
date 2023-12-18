@@ -648,6 +648,12 @@ void CONFIG_ReadSetup( void )
    BlasterConfig.Emu = dummy;
    SCRIPT_GetNumber( scripthandle, "Sound Setup", "ReverseStereo",&dummy);
    ReverseStereo = dummy;
+#ifdef RRRA
+   if (FXDevice == SoundBlaster)
+       func_A85B0(BlasterConfig.Address, BlasterConfig.Interrupt, BlasterConfig.Dma8);
+   else
+       func_A85B0(BlasterConfig.Address, BlasterConfig.Interrupt, BlasterConfig.Dma16);
+#endif
 
    SCRIPT_GetNumber( scripthandle, "Controls","ControllerType",&ControllerType);
    SCRIPT_GetNumber( scripthandle, "Controls","MouseFlip",&ud.mouseflip);

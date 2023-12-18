@@ -53,6 +53,8 @@ typedef struct _PMInfo {
     unsigned char *SetDisplayStart;
 } PMInfo;
 
+unsigned int cdecl GenWinFuncPtr(void);
+
 int vbe_InitBuffer(void);
 int vbe_GetVgaInfo(VgaInfo *a1);
 int vbe_GetModeInfo(unsigned int a1, ModeInfo *a2, unsigned int *a3, unsigned int *a4);

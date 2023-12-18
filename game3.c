@@ -110,7 +110,11 @@ void typemode(void)
 
                 if( KB_KeyWaiting() )
                 {
+#ifdef RRRA
+                     i = KB_Getch();
+#else
                      i = KB_GetCh();
+#endif
 
                      if(i == 'A' || i == 'a' || i == 13)
                           sendmessagecommand = ud.multimode;

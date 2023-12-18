@@ -68,7 +68,7 @@ void main(int argc,char **argv)
     long i, j, k, l;
     int var_10;
 #ifdef RRRA
-    int playmve = 1;
+    int playmve_ = 1;
 #endif
 
     //copyprotect();
@@ -105,7 +105,7 @@ void main(int argc,char **argv)
                             c++;
                             if(*c == 'i' || *c == 'I')
                             {
-                                playmve = 0;
+                                playmve_ = 0;
                             }
                             break;
                     }
@@ -116,10 +116,12 @@ void main(int argc,char **argv)
     }
 
     if (CheckParm("MAP") || CheckParm("NET"))
-        playmve = 0;
-    if (playmve) {
-        //sub_DACF0(257);
-        //sub_A89C0("REDINT.MVE",argv[0],1);
+        playmve_ = 0;
+    if (playmve_) {
+void cdecl MVE_gfxMode(int);
+
+        MVE_gfxMode(257);
+        playmve("REDINT.MVE",argv[0],1);
     }
 #else
 
