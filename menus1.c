@@ -428,6 +428,7 @@ loadplayer(signed char spot)
      kdfread(&geoy2[0],sizeof(geoy2[0]),64,fil);
      kdfread(&geoz2[0],sizeof(geoz2[0]),64,fil);
      kdfread(&geocnt,sizeof(geocnt),1,fil);
+     tilesizx[0] = tilesizy[0] = 0;
 #ifdef RRRA
      kdfread(&WindTime,4,1,fil);
      kdfread(&WindDir,4,1,fil);
@@ -437,8 +438,6 @@ loadplayer(signed char spot)
          sub_86730(ps[myconnectindex].fogtype);
      else if (ps[myconnectindex].fogtype == 0)
          sub_86730(0);
-#else
-     tilesizx[0] = tilesizy[0] = 0;
 #endif
 
      kclose(fil);

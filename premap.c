@@ -307,6 +307,7 @@ void resetplayerstats(short snum)
         p->OnMotorcycle = 0;
         p->gotweapon[RA13_WEAPON] = 0;
         p->curr_weapon = RA15_WEAPON;
+        checkavailweapon(p);
     }
     p->raat60b = 0;
     p->raat5b5 = 0;
@@ -326,6 +327,7 @@ void resetplayerstats(short snum)
         p->OnBoat = 0;
         p->gotweapon[RA14_WEAPON] = 0;
         p->curr_weapon = RA15_WEAPON;
+        checkavailweapon(p);
     }
     p->NotOnWater = 0;
     p->raat5d9 = 0;
@@ -2163,7 +2165,7 @@ void enterlevel(char g)
 {
     short i,j;
     long l;
-    char levname[256];
+    char levname[80];
 
     if( (g&MODE_DEMO) != MODE_DEMO ) ud.recstat = ud.m_recstat;
     ud.respawn_monsters = ud.m_respawn_monsters;

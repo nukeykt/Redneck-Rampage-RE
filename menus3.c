@@ -510,8 +510,8 @@ void PlayMapAnim(void)
     char *fn;
     char t;
         char *animbuf, *palptr;
-    long i, j, k, length=0, numframes=0;
-    int32 handle=-1;
+    long i, j, k, length, numframes;
+    int32 handle;
     char *windir;
 
     fn = NULL;
@@ -642,7 +642,8 @@ void PlayMapAnim(void)
 
 void ShowMapFrame(void)
 {
-    short t = -1, i;
+    short t;
+    t = -1;
     ps[myconnectindex].palette = palette;
     if (ud.volume_number == 0)
     {
@@ -698,10 +699,13 @@ void ShowMapFrame(void)
                 break;
         }
     }
-    rotatesprite(0,0,65536,0,8624+t,0,0,10+16+64+128,0,0,xdim-1,ydim-1);
-    for (i = 0; i < 64; i++)
-        palto(0,0,0,63-i);
-    ps[myconnectindex].palette = palette;
+    {
+        short i;
+        rotatesprite(0,0,65536,0,8624+t,0,0,10+16+64+128,0,0,xdim-1,ydim-1);
+        for (i = 0; i < 64; i++)
+            palto(0,0,0,63-i);
+        ps[myconnectindex].palette = palette;
+    }
 }
 
 #endif

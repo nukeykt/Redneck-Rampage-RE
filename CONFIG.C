@@ -543,6 +543,10 @@ void readsavenames(void)
 ===================
 */
 
+#ifdef RRRA
+void func_A85B0(unsigned short a1, unsigned short a2, unsigned short a3);
+#endif
+
 void CONFIG_ReadSetup( void )
 {
    int32 dummy;

@@ -1924,55 +1924,57 @@ void resetlanepics(void)
     for(tag=0;tag<4;tag++)
     {
         pic = tag + 1;
-        if (pic == 0) continue;
-        pic += LANEPICS+1;
-        copytilepiece(LANEPICS+1,0,0,128,64, pic,0,0);
-        for(i=0;i<10;i++)
+        if (pic)
         {
-            switch (i)
+            pic += LANEPICS+1;
+            copytilepiece(LANEPICS+1,0,0,128,64, pic,0,0);
+            for(i=0;i<10;i++)
             {
-                case 0:
-                    x = 64;
-                    y = 48;
-                    break;
-                case 1:
-                    x = 56;
-                    y = 40;
-                    break;
-                case 2:
-                    x = 72;
-                    y = 40;
-                    break;
-                case 3:
-                    x = 48;
-                    y = 32;
-                    break;
-                case 4:
-                    x = 64;
-                    y = 32;
-                    break;
-                case 5:
-                    x = 80;
-                    y = 32;
-                    break;
-                case 6:
-                    x = 40;
-                    y = 24;
-                    break;
-                case 7:
-                    x = 56;
-                    y = 24;
-                    break;
-                case 8:
-                    x = 72;
-                    y = 24;
-                    break;
-                case 9:
-                    x = 88;
-                    y = 24;
-                    break;
+                switch (i)
+                {
+                    case 0:
+                        x = 64;
+                        y = 48;
+                        break;
+                    case 1:
+                        x = 56;
+                        y = 40;
+                        break;
+                    case 2:
+                        x = 72;
+                        y = 40;
+                        break;
+                    case 3:
+                        x = 48;
+                        y = 32;
+                        break;
+                    case 4:
+                        x = 64;
+                        y = 32;
+                        break;
+                    case 5:
+                        x = 80;
+                        y = 32;
+                        break;
+                    case 6:
+                        x = 40;
+                        y = 24;
+                        break;
+                    case 7:
+                        x = 56;
+                        y = 24;
+                        break;
+                    case 8:
+                        x = 72;
+                        y = 24;
+                        break;
+                    case 9:
+                        x = 88;
+                        y = 24;
+                        break;
+                }
+                copytilepiece(LANEPICS,0,0,8,8,pic,x-4,y-10);
             }
-            copytilepiece(LANEPICS,0,0,8,8,pic,x-4,y-10);
         }
     }
 }

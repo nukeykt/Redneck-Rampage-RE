@@ -14,7 +14,7 @@ ra.exe : game1.obj game2.obj game3.obj game4.obj game5.obj game6.obj game7.obj g
 			player1.obj player2.obj player3.obj player4.obj player5.obj &
 			premap.obj sector1.obj sector2.obj sector3.obj sounds.obj rts.obj &
 			config.obj animlib.obj &
-			lava.obj noise.obj warpfx.obj dpmi.obj _debug.obj rbaudio.obj playmve.obj usrhooks.obj
+			lava.obj noise.obj warpfx.obj dpmi.obj _debug.obj rbaudio.obj playmve.obj usrhooks.obj fog.obj
 		wlink $(all) @makefil2.lnk
 !else
 rr.exe : game1.obj game2.obj game3.obj game4.obj game5.obj game6.obj game7.obj game8.obj game9.obj &
@@ -119,5 +119,7 @@ playmve.obj : playmve.c $(globaldependencies)
 	wcc386 playmve $(compileoptions) -i=.\sos;.\mve
 usrhooks.obj : usrhooks.c $(globaldependencies)
 	wcc386 usrhooks $(compileoptions)
+fog.obj : fog.c $(globaldependencies)
+	wcc386 fog $(compileoptions)
 !endif
 

@@ -100,6 +100,8 @@ void main(int argc,char **argv)
                     c++;
                     switch(*c)
                     {
+                        default:
+                            break;
                         case 'n':
                         case 'N':
                             c++;
@@ -118,7 +120,7 @@ void main(int argc,char **argv)
     if (CheckParm("MAP") || CheckParm("NET"))
         playmve_ = 0;
     if (playmve_) {
-void cdecl MVE_gfxMode(int);
+void cdecl MVE_gfxMode(short);
 
         MVE_gfxMode(257);
         playmve("REDINT.MVE",argv[0],1);
@@ -333,7 +335,7 @@ void cdecl MVE_gfxMode(int);
                 vscrn();
                 ud.screen_size = i;
 #ifdef RRRA
-                if (playerswhenstarted > 1 && numplayers > 1)
+                if (playerswhenstarted > 1 || numplayers > 1)
                     dobonus(0);
                 else
                     dobonus2(0);

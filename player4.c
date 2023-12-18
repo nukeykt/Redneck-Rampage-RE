@@ -1382,7 +1382,7 @@ void processinput(short snum)
             {
                 p->on_ground = 0;
 #ifdef RRRA
-                if ((p->OnMotorcycle || p->OnBoat) && fz-(i<<8)*2 > p->posz)
+                if ((p->OnMotorcycle || p->OnBoat) && fz-((i<<8)<<1) > p->posz)
                 {
                     if (p->MotoOnGround)
                     {
@@ -2967,7 +2967,7 @@ void processinput(short snum)
                         p->ammo_amount[TRIPBOMB_WEAPON]--;
                         p->gotweapon[TRIPBOMB_WEAPON] = 0;
 #ifdef RRRA
-                        if(p->on_ground && (sb_snum&2) && !p->OnMotorcycle)
+                        if(p->on_ground && ( (sb_snum&2) && !p->OnMotorcycle ) )
 #else
                         if(p->on_ground && (sb_snum&2) )
 #endif

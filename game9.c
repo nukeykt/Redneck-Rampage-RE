@@ -442,7 +442,7 @@ void dobonus2(char bonusonly)
 
             if( totalclock > (1000000000L) && totalclock < (1000000320L) )
             {
-                switch( ((unsigned long)totalclock>>4)%15 )
+                switch( (totalclock>>4)%15 )
                 {
                     case 0:
                         if(bonuscnt == 6)
@@ -663,7 +663,6 @@ void dobonus2(char bonusonly)
         ps[myconnectindex].palette = palette;
         while (1)
         {
-            int var40;
             switch ((totalclock >> 4) & 1)
             {
             case 0:
@@ -673,7 +672,7 @@ void dobonus2(char bonusonly)
                 ps[myconnectindex].palette = palette;
                 getpackets();
                 break;
-            case 1:
+            default:
                 rotatesprite(0,0,65536,0,0,RRTILE8677+1,0,2+8+16+64+128,0,0,xdim-1,ydim-1);
                 nextpage();
                 palto(0, 0, 0, 0);
@@ -1549,7 +1548,7 @@ void dobonus(char bonusonly)
 
             if( totalclock > (1000000000L) && totalclock < (1000000320L) )
             {
-                switch( ((unsigned long)totalclock>>4)%15 )
+                switch( (totalclock>>4)%15 )
                 {
                     case 0:
                         if(bonuscnt == 6)

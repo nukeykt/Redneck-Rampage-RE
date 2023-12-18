@@ -669,7 +669,7 @@ char checkhitswitch(short snum,long w,char switchtype)
                     picnum == (MULTISWITCH+2) || picnum == (MULTISWITCH+3) )
                         lotag += picnum-MULTISWITCH;
 #ifdef RRRA
-                if( picnum == MULTISWITCH2 || picnum == (MULTISWITCH2+1) ||
+                else if( picnum == MULTISWITCH2 || picnum == (MULTISWITCH2+1) ||
                     picnum == (MULTISWITCH2+2) || picnum == (MULTISWITCH2+3) )
                         lotag += picnum-MULTISWITCH2;
 #endif

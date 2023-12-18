@@ -366,7 +366,6 @@ void OffBoat(struct player_struct *p)
         p->posyv = 0;
         p->posxv -= sintable[(p->ang+512)&2047]<<7;
         p->posyv -= sintable[p->ang&2047]<<7;
-        p->raat5b9 = 0;
         j = spawn(p->i, EMPTYBOAT);
         sprite[j].ang = p->ang;
         sprite[j].xvel += sintable[(p->ang+512)&2047]<<7;
@@ -584,11 +583,30 @@ void weapon_amounts(struct player_struct *p,long x,long y,long u)
      }
      if (u&32)
      {
+#ifdef RRRA
+         if (cw == RPG_WEAPON)
+         {
+             if (u != 0xffffffff) patchstatusbar(135,178,135+8,178+6);
+             weaponnum(RPG_WEAPON,x+39,y,
+                      p->ammo_amount[RPG_WEAPON],max_ammo_amount[RPG_WEAPON],
+                      (!p->gotweapon[RPG_WEAPON]*9)+12-19*
+                      (cw == RPG_WEAPON) );
+         }
+         else if (cw == RA16_WEAPON)
+         {
+             if (u != 0xffffffff) patchstatusbar(135,178,135+8,178+6);
+             weaponnum(RA16_WEAPON,x+39,y,
+                      p->ammo_amount[RA16_WEAPON],max_ammo_amount[RA16_WEAPON],
+                      (!p->gotweapon[RA16_WEAPON]*9)+12-19*
+                      (cw == RA16_WEAPON) );
+         }
+#else
          if (u != 0xffffffff) patchstatusbar(135,178,135+8,178+6);
          weaponnum(RPG_WEAPON,x+39,y,
                   p->ammo_amount[RPG_WEAPON],max_ammo_amount[RPG_WEAPON],
                   (!p->gotweapon[RPG_WEAPON]*9)+12-19*
                   (cw == RPG_WEAPON) );
+#endif
      }
      if (u&64)
      {
