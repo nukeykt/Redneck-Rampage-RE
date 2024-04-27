@@ -79,6 +79,7 @@ W32 sosDIGIGetSampleID          ( HANDLE, HANDLE );
 W32 sosDIGIGetSampleHandle      ( HANDLE, HANDLE );
 W32 sosDIGISamplesPlaying       ( HANDLE );
 BOOL sosDIGISampleDone           ( HANDLE, HANDLE );
+W32 sosDIGISetMasterVolume      ( HANDLE, W32 );
 
 // memory locking functions
 VOID sosModule1Start             ( VOID );
